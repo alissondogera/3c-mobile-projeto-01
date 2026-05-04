@@ -1,70 +1,87 @@
-import { View, Text, StyleSheet, Pressable  } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { useState } from 'react'
 
+export default function Menu({ mudarPagina }) {
+  const [selecionado, setSelecionado] = useState("")
 
-const EstilosMenu = StyleSheet.create({
+  return (
+    <View style={styles.menu}>
+
+      <Text style={styles.titulo}>Escolha um integrante:</Text>
+
+      <Pressable
+        style={[styles.botao, selecionado === "Alisson" && styles.botaoAtivo]}
+        onPress={() => {
+          setSelecionado("Alisson")
+          mudarPagina("Alisson")
+        }}
+      >
+        <Text style={styles.texto}>Alisson</Text>
+      </Pressable>
+
+      <Pressable
+        style={[styles.botao, selecionado === "Willy" && styles.botaoAtivo]}
+        onPress={() => {
+          setSelecionado("Willy")
+          mudarPagina("Willy")
+        }}
+      >
+        <Text style={styles.texto}>Willy</Text>
+      </Pressable>
+
+      <Pressable
+        style={[styles.botao, selecionado === "Abraão" && styles.botaoAtivo]}
+        onPress={() => {
+          setSelecionado("Abraão")
+          mudarPagina("Abraão")
+        }}
+      >
+        <Text style={styles.texto}>Abraão</Text>
+      </Pressable>
+
+      <Pressable
+        style={[styles.botao, selecionado === "Daniela" && styles.botaoAtivo]}
+        onPress={() => {
+          setSelecionado("Daniela")
+          mudarPagina("Daniela")
+        }}
+      >
+        <Text style={styles.texto}>Daniela</Text>
+      </Pressable>
+
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
   menu: {
     backgroundColor: "#222",
     padding: 20,
     margin: 20,
-    borderRadius: 10
+    borderRadius: 10,
+    alignItems: "center"
   },
+
   titulo: {
     color: "#fff",
     fontSize: 18,
     marginBottom: 10
   },
-    botaoMenu: {
+
+  botao: {
     backgroundColor: "#111",
-    color: "#ddd",
-    border: "2px solid #48a",
-    borderRadius: "10px",
-    padding: "10px",
-    margin: "10px",
+    padding: 10,
+    margin: 8,
+    borderRadius: 8,
+    width: "80%",
+    alignItems: "center"
   },
-  botaoMenuSelecionado: {
-    backgroundColor: "#246",
+
+  botaoAtivo: {
+    backgroundColor: "#246"
+  },
+
+  texto: {
+    color: "#fff"
   }
 })
-
-export default function Menu({
-  Thais, Laura, mudarPagina
-}) {
-    const [selecionado, setSelecionado] = useState("Nada")
-
-    return (
-        <view style={EstilosMenu.menu}>
-            <Pressable
-            style={() => [EstilosMenu.menu,
-                {
-                    backgroundColor: selecionado === "Thais" ?
-                         "#246" :
-                         "#111"
-                }
-            ]}
-            onPress={() => {
-                mudarPagina(Thais)
-                setselecionado("Thais")
-            }}
-        >
-            thais
-        </Pressable>
-            <Pressable
-            style={() => [EstilosMenu.menu,
-                {
-                    backgroundColor: selecionado === "Laura" ?
-                         "#246" :
-                         "#111"
-                }
-            ]}
-            onPress={() => {
-                mudarPagina(Laura)
-                setselecionado("Laura")
-            }}
-            >
-                Laura
-            </Pressable>
-        </view>
-    )
-}
-

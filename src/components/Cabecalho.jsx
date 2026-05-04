@@ -1,73 +1,63 @@
-import { useState } from 'react'
-import { StyleSheet } from 'react-native';
-import { View, Pressable, Text } from 'react-native'
+import { useState } from "react";
+import { View, Pressable, Text, StyleSheet } from "react-native";
 
-const estilosCabecalho = StyleSheet.create({
-  cabecalho: {
-    backgroundColor: "#333",
-    margin: "0px 0px 0px auto",
-    height: "70px",
-    width: "100vw",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0px auto",
-    marginBottom: "20px",
-    marginTop: "0px",
-  },
-  botaoCabecalho: {
-    backgroundColor: "#111",
-    color: "#ddd",
-    border: "2px solid #48a",
-    borderRadius: "10px",
-    padding: "10px",
-    margin: "10px",
-  },
-  botaoCabecalhoSelecionado: {
-    backgroundColor: "#246",
-  }
-})
-
-export default function Cabecalho({
-  paginaPrincipal, sobreEquipe, mudarPagina
-}) {
-  const [selecionado, setSelecionado] = useState("principal")
+export default function Cabecalho({ mudarPagina }) {
+  const [selecionado, setSelecionado] = useState("home");
 
   return (
-    <View style={estilosCabecalho.cabecalho}>
+    <View style={styles.cabecalho}>
+
       <Pressable
-        style={() => [
-          estilosCabecalho.botaoCabecalho,
-          {
-            backgroundColor: selecionado === "principal" ?
-              "#246" :
-              "#111"
-          }
+        style={[
+          styles.botao,
+          selecionado === "home" && styles.botaoAtivo
         ]}
         onPress={() => {
-          mudarPagina(paginaPrincipal)
-          setSelecionado("principal")
+          setSelecionado("home");
+          mudarPagina("home");
         }}
       >
-        Página principal
+        <Text style={styles.texto}>Página principal</Text>
       </Pressable>
+
       <Pressable
-        style={() => [
-          estilosCabecalho.botaoCabecalho,
-          {
-            backgroundColor: selecionado === "sobreEquipe" ?
-              "#246" :
-              "#111"
-          }
+        style={[
+          styles.botao,
+          selecionado === "sobre" && styles.botaoAtivo
         ]}
         onPress={() => {
-          mudarPagina(sobreEquipe)
-          setSelecionado("sobreEquipe")
+          setSelecionado("sobre");
+          mudarPagina("sobre");
         }}
       >
-        Sobre a Equipe
+        <Text style={styles.texto}>Sobre a equipe</Text>
       </Pressable>
+
     </View>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  cabecalho: {
+    backgroundColor: "#333",
+    height: 70,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  botao: {
+    backgroundColor: "#111",
+    padding: 10,
+    margin: 10,
+    borderRadius: 8,
+  },
+
+  botaoAtivo: {
+    backgroundColor: "#246",
+  },
+
+  texto: {
+    color: "#fff",
+  },
+});
